@@ -1,9 +1,39 @@
+<div class="navLeft navCommon" id="left">
+    <div class="img"></div>
+</div>
+<div class="navRight navCommon" id="right">
+    <div id="navList">
+        <ul class="navList">
+            <li><a href="/login">logIn</a></li>
+            <li><a href="/#">To the Top</a></li>             
+            <li><a href="/#utilities">Our utilities</a></li>
+            <li><a href="/#address">Address and schedule</a></li>
+        </ul>
+    </div>
+</div>
+
 
 <nav class="navBar">
     <h1 class="logo">PFAS</h1>
-    <ul class="nav">
-        <li><a href="/login">logIn</a></li>                
-        <li><a href="#">Plans</a></li>
-        <li><a href="#">Schedule</a></li>
-    </ul>
+    <div class="navButton" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>   
 </nav>
+
+<script>
+    let navButton = document.querySelector(".navButton");
+    let navList = document.querySelector("#navList");
+    let leftNav =document.querySelector("#left");
+    let rightNav =document.querySelector("#right");
+    navButton.addEventListener("click",()=>{
+        rightNav.classList.toggle("rightHide");
+        leftNav.classList.toggle("leftHide");
+    })
+    navList.addEventListener("click",()=>{
+        rightNav.classList.toggle("rightHide");
+        leftNav.classList.toggle("leftHide");
+    })
+</script>
+
