@@ -1,0 +1,41 @@
+.navBar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 10vh;
+    z-index: 100;
+
+
+
+    .logo {
+        color: #fff;
+        font-size: 30px;
+        border-bottom: 2px solid #fff;
+        padding-bottom: 5px;
+        margin-left: 200px;
+    }
+
+    .nav {
+        list-style: none;
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+
+            a {
+                text-decoration: none;
+                color: #fff;
+                font-size: 20px;
+                text-transform: uppercase;
+                transition: all .3s;
+
+                &:hover {
+                    color: #DA1212;
+                }
+            }
+        }
+    }
+
+}
