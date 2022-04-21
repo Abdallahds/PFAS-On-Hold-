@@ -33,8 +33,8 @@ app.get("/login", (req, res) => {
     res.render(__dirname + "/pages/login")
 })
 
-app.get("/admin", (req, res) => {
-    res.render(__dirname + "/pages/admin")
+app.get("/manager", (req, res) => {
+    res.render(__dirname + "/pages/manager")
 })
 
 
@@ -44,7 +44,7 @@ app.post("/login", (req, res) => {
     userModle.findOne({ userName: req.body.userName }, (err, doc) => {
         if (doc.password == req.body.password)
             if (doc.role == "1")
-                res.render(__dirname + "/pages/admin")
+                res.render(__dirname + "/pages/manager")
     })
 })
 

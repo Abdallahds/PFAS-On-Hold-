@@ -242,6 +242,59 @@
         background-color: #DA1212;
         color: #fff; }
 
+.managerNav {
+  width: 100%;
+  height: 10vh;
+  background-color: #DA1212;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .managerNav .logo {
+    margin-left: 50px; }
+  .managerNav .welcomeText {
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+    color: #fff; }
+  .managerNav ul {
+    list-style: none; }
+    .managerNav ul li {
+      margin-right: 50px; }
+      .managerNav ul li a {
+        text-decoration: none;
+        color: black; }
+
+.manager {
+  width: 100%;
+  height: 90vh; }
+  .manager .managerTools {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 30px; }
+    .manager .managerTools a {
+      text-decoration: none;
+      font-size: 20px;
+      border: 2px solid #000;
+      padding: 20px 30px;
+      border-radius: 20px;
+      color: #000;
+      text-transform: uppercase; }
+      .manager .managerTools a:hover {
+        border: 2px solid #DA1212;
+        background-color: #DA1212;
+        color: #fff; }
+  .manager .financeInfo {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+
 * {
   margin: 0;
   padding: 0;
