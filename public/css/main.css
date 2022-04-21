@@ -93,7 +93,8 @@
     .address .schedule .times li {
       font-size: 20px;
       letter-spacing: 10px;
-      line-height: 30px; }
+      line-height: 30px;
+      margin-bottom: 8px; }
 
 @keyframes headerTitle {
   0% {
