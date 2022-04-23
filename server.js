@@ -12,6 +12,11 @@ app.listen(3000, () => {
     console.log("the server is on using port 3000");
 })
 
+//////////////////////globleVariabils//////////////////////
+
+let employeeSearch = [];
+
+
 /////////////////////////dataBase/////////////////
 
 mongoose.connect("mongodb://localhost:27017/myGym", { useUnifiedTopology: true, useNewUrlParser: true })
@@ -38,7 +43,7 @@ app.get("/manager", (req, res) => {
 })
 
 app.get("/editEmployee", (req, res) => {
-    res.render(__dirname + "/pages/editEmployee")
+    res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
 })
 
 
@@ -59,6 +64,17 @@ app.post("/employeeAdd", (req, res) => {
         role: "employee"
     })
     newUser.save();
-    res.redirect("/editEmployee")
+    res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
+})
+
+
+app.post("/employeeSearch", (req, res) => {
+    //     console.log(req.body.searchEmployeeName);
+    userModle.find({ role: "employee", userName: { $regex: '.*' + req.body.searchEmployeeName + '.*' } }, (err, doc) => {
+        // console.log(doc);        
+        employeeSearch = doc;
+        res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch });
+    });
+
 })
 

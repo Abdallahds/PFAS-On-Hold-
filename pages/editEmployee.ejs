@@ -14,16 +14,24 @@
 <div class="editEmployee">
     <div class="employeeSearch">
         <form action="/employeeAdd" method="post">
-            <input type="text" name="newEmployeeName" placeholder="new Employee Name">
+            <input type="text" name="newEmployeeName" placeholder="new Employee Full Name">
             <button type="submit">Add new Employee</button>
         </form>
         <form action="/employeeSearch" method="post" class="">
-            <input type="text" placeholder="employee name">
+            <input type="text" name="searchEmployeeName" placeholder="employee name">
             <button type="submit">search</button>
         </form>
     </div>
 
     <div class="employeeResult">
+       <% employeeSearch.forEach( employee =>{ %>
+            <div class="employee">
+                 <h1>
+                    <%= employee.userName %>
+                 </h1>   
+            </div>
+        <% }) %>
+        
         
     </div>
     
