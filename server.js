@@ -37,6 +37,10 @@ app.get("/manager", (req, res) => {
     res.render(__dirname + "/pages/manager")
 })
 
+app.get("/editEmployee", (req, res) => {
+    res.render(__dirname + "/pages/editEmployee")
+})
+
 
 ///////////////////////post////////////////////////
 

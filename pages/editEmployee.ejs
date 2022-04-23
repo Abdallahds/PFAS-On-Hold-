@@ -1,0 +1,33 @@
+<%- include ("component/header"); -%>
+<div class="managerNav">
+    <h1 class="logo">PFAS</h1>
+    <h1 class="welcomeText">
+        Edit employees
+    </h1>
+    <ul>
+        <li><a href="#">logOut</a></li>
+    </ul>
+</div>
+
+<%- include ("component/managerTools"); -%>
+
+<div class="editEmployee">
+    <div class="employeeSearch">
+        <form action="/employeeAdd" method="post">
+            <input type="text" placeholder="new Employee Name">
+            <button type="submit">Add new Employee</button>
+        </form>
+        <form action="/employeeSearch" method="post" class="">
+            <input type="text" placeholder="employee name">
+            <button type="submit">search</button>
+        </form>
+    </div>
+
+    <div class="employeeResult">
+        
+    </div>
+    
+</div>
+
+
+<%- include ("component/footer"); -%>
