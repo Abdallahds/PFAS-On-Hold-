@@ -52,3 +52,13 @@ app.post("/login", (req, res) => {
     })
 })
 
+app.post("/employeeAdd", (req, res) => {
+    const newUser = new userModle({
+        userName: req.body.newEmployeeName,
+        password: "123",
+        role: "employee"
+    })
+    newUser.save();
+    res.redirect("/editEmployee")
+})
+

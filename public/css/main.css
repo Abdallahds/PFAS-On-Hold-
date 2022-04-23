@@ -313,6 +313,26 @@
     justify-content: space-around;
     width: 100%;
     height: 10vh; }
+    .editEmployee .employeeSearch form input {
+      font-size: 20px;
+      height: 40px;
+      padding-left: 10px;
+      width: 300px;
+      margin-right: 20px;
+      border: 1px solid #000;
+      border-radius: 5px; }
+    .editEmployee .employeeSearch form button {
+      background-color: #fff;
+      border: 1px solid #DA1212;
+      height: 40px;
+      width: 180px;
+      font-size: 15px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      transition: all .3s; }
+      .editEmployee .employeeSearch form button:hover {
+        background-color: #DA1212;
+        color: #fff; }
   .editEmployee .employeeResult {
     width: 100%;
     height: 70vh;
