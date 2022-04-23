@@ -46,6 +46,10 @@ app.get("/editEmployee", (req, res) => {
     res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
 })
 
+app.get("/editCustomers", (req, res) => {
+    res.render(__dirname + "/pages/editCustomer");
+})
+
 
 ///////////////////////post////////////////////////
 
@@ -59,7 +63,7 @@ app.post("/login", (req, res) => {
 
 app.post("/employeeAdd", (req, res) => {
     const newUser = new userModle({
-        userName: req.body.newEmployeeName,
+        userName: req.body.newEmployeeName.toLowerCase(),
         password: "123",
         role: "employee"
     })
@@ -70,11 +74,17 @@ app.post("/employeeAdd", (req, res) => {
 
 app.post("/employeeSearch", (req, res) => {
     //     console.log(req.body.searchEmployeeName);
-    userModle.find({ role: "employee", userName: { $regex: '.*' + req.body.searchEmployeeName + '.*' } }, (err, doc) => {
+    userModle.find({ role: "employee", userName: { $regex: '.*' + req.body.searchEmployeeName.toLowerCase() + '.*' } }, (err, doc) => {
         // console.log(doc);        
         employeeSearch = doc;
         res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch });
     });
-
 })
 
+app.post("/customerAdd", (req, res) => {
+    console.log(req.body.NewCustomerName);
+})
+
+app.post("/customerSearch", (req, res) => {
+    console.log(req.body.searchCustomerName);
+})
