@@ -11,7 +11,7 @@
 <%- include ("component/managerTools"); -%>
 
 
-<div class="customers">
+<div class="customers editEmployee">
     <div class="customerSearch">
         <form action="/customerAdd" method="post">
             <input type="text" placeholder="New Customer Full Name" name="NewCustomerName">
@@ -23,9 +23,15 @@
         </form>
     </div>
 
-    <div class="customerResult">
-        <h1>customerResult</h1>
-    </div>
+    <div class="employeeResult">
+        <% customerSerach.forEach( customer =>{ %>
+             <div class="employee">
+                  <h1>
+                     <%= customer.userName %>
+                  </h1>   
+             </div>
+         <% }) %>       
+     </div>
 
 </div>
 

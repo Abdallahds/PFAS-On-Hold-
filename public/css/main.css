@@ -351,6 +351,27 @@
   display: flex;
   align-items: center;
   flex-direction: column; }
+  .customers .customerSearch {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0; }
+    .customers .customerSearch form input {
+      width: 250px;
+      height: 50px; }
+    .customers .customerSearch form button {
+      background-color: #fff;
+      border: 1px solid #DA1212;
+      height: 40px;
+      width: 180px;
+      font-size: 15px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      transition: all .3s; }
+      .customers .customerSearch form button:hover {
+        background-color: #DA1212;
+        color: #fff; }
 
 * {
   margin: 0;

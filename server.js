@@ -15,6 +15,7 @@ app.listen(3000, () => {
 //////////////////////globleVariabils//////////////////////
 
 let employeeSearch = [];
+let customerSerach = [];
 
 
 /////////////////////////dataBase/////////////////
@@ -25,9 +26,15 @@ const userSchema = mongoose.Schema({
     userName: String,
     password: String,
     role: String
-})
+});
+
+const customerSchema = mongoose.Schema({
+    userName: String
+});
 
 const userModle = mongoose.model("user", userSchema);
+
+const customerModle = mongoose.model("customer", customerSchema);
 
 /////////////////////////get//////////////////////
 
@@ -47,7 +54,7 @@ app.get("/editEmployee", (req, res) => {
 })
 
 app.get("/editCustomers", (req, res) => {
-    res.render(__dirname + "/pages/editCustomer");
+    res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
 })
 
 
@@ -73,18 +80,24 @@ app.post("/employeeAdd", (req, res) => {
 
 
 app.post("/employeeSearch", (req, res) => {
-    //     console.log(req.body.searchEmployeeName);
     userModle.find({ role: "employee", userName: { $regex: '.*' + req.body.searchEmployeeName.toLowerCase() + '.*' } }, (err, doc) => {
-        // console.log(doc);        
         employeeSearch = doc;
         res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch });
     });
 })
 
 app.post("/customerAdd", (req, res) => {
-    console.log(req.body.NewCustomerName);
+    const newCustomer = new customerModle({
+        userName: req.body.NewCustomerName
+    });
+    newCustomer.save();
+    res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
 })
 
 app.post("/customerSearch", (req, res) => {
-    console.log(req.body.searchCustomerName);
+    customerModle.find({ userName: { $regex: '.*' + req.body.searchCustomerName.toLowerCase() + '.*' } }, (err, doc) => {
+        console.log(doc);
+        customerSerach = doc;
+        res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
+    })
 })
