@@ -57,6 +57,18 @@ app.get("/editCustomers", (req, res) => {
     res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
 })
 
+app.get("/reseptionEmployee", (req, res) => {
+    res.render(__dirname + "/pages/reseptionEmployee", { customerSerach: customerSerach });
+})
+
+app.get("/trainerEmployee", (req, res) => {
+    res.render(__dirname + "/pages/trainerEmployee", { customerSerach: customerSerach });
+})
+
+app.get("/customarPage", (req, res) => {
+    res.render(__dirname + "/pages/customarPage");
+})
+
 
 ///////////////////////post////////////////////////
 
@@ -72,7 +84,7 @@ app.post("/employeeAdd", (req, res) => {
     const newUser = new userModle({
         userName: req.body.newEmployeeName.toLowerCase(),
         password: "123",
-        role: "employee"
+        role: req.body.employeeType
     })
     newUser.save();
     res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
@@ -80,7 +92,7 @@ app.post("/employeeAdd", (req, res) => {
 
 
 app.post("/employeeSearch", (req, res) => {
-    userModle.find({ role: "employee", userName: { $regex: '.*' + req.body.searchEmployeeName.toLowerCase() + '.*' } }, (err, doc) => {
+    userModle.find({ role: { $in: ["reseption", "trainer", "employee"] }, userName: { $regex: '.*' + req.body.searchEmployeeName.toLowerCase() + '.*' } }, (err, doc) => {
         employeeSearch = doc;
         res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch });
     });

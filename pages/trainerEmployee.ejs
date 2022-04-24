@@ -1,21 +1,20 @@
 <%- include ("component/header"); -%>
+
 <div class="managerNav">
     <h1 class="logo">PFAS</h1>
     <h1 class="welcomeText">
-        welcome to the manager page.
+        welcome to the trainer page.
     </h1>
     <ul>
         <li><a href="/">logOut</a></li>
     </ul>
 </div>
+
 <div class="manager">
-    
-    <%- include ("component/managerTools"); -%>
-    <div class="financeInfo">
-        <h1>finanace graph</h1>
-        <h1>more information</h1>
+    <div class="managerTools">
+        <a href="/trainerEmployee">Home Page</a> 
+        <a href="/editCustomers">Edit Customers</a> 
+        <a href="/employeeInfo">Your information</a>
     </div>
 </div>
-
-
 <%- include ("component/footer"); -%>
