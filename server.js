@@ -69,7 +69,6 @@ app.get("/customarPage", (req, res) => {
     res.render(__dirname + "/pages/customarPage");
 })
 
-
 ///////////////////////post////////////////////////
 
 app.post("/login", (req, res) => {
@@ -108,7 +107,6 @@ app.post("/customerAdd", (req, res) => {
 
 app.post("/customerSearch", (req, res) => {
     customerModle.find({ userName: { $regex: '.*' + req.body.searchCustomerName.toLowerCase() + '.*' } }, (err, doc) => {
-        console.log(doc);
         customerSerach = doc;
         res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
     })
