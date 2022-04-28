@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
+const session = require("express-session")
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -17,8 +18,19 @@ app.listen(3000, () => {
 let employeeSearch = [];
 let customerSerach = [];
 
+////////////////////////session////////////////////////////
+app.use(session({
+    secret: "powerGym",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true,
+        isAuth: false
+    }
+}
+))
 
-/////////////////////////dataBase/////////////////
+/////////////////////////dataBase//////////////////////////
 
 mongoose.connect("mongodb://localhost:27017/myGym", { useUnifiedTopology: true, useNewUrlParser: true })
 
@@ -36,53 +48,66 @@ const userModle = mongoose.model("user", userSchema);
 
 const customerModle = mongoose.model("customer", customerSchema);
 
-/////////////////////////get//////////////////////
+/////////////////////////get//////////////////////////////
 
 app.get("/", (req, res) => {
+    console.log(req.session.cookie.isAuth);
     res.render(__dirname + "/pages/index")
 })
 app.get("/login", (req, res) => {
     res.render(__dirname + "/pages/login")
 })
 
-app.get("/manager", (req, res) => {
-    res.render(__dirname + "/pages/manager")
-})
-
 app.get("/editEmployee", (req, res) => {
-    res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
+    if (req.session.cookie.isAuth) {
+        res.render(__dirname + "/pages/editEmployee", { employeeSearch: employeeSearch })
+    }
+    else {
+        res.redirect("/")
+    }
 })
 
 app.get("/editCustomers", (req, res) => {
-    res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
-})
-
-app.get("/reseptionEmployee", (req, res) => {
-    res.render(__dirname + "/pages/reseptionEmployee", { customerSerach: customerSerach });
-})
-
-app.get("/trainerEmployee", (req, res) => {
-    res.render(__dirname + "/pages/trainerEmployee", { customerSerach: customerSerach });
+    if (req.session.cookie.isAuth) {
+        res.render(__dirname + "/pages/editCustomer", { customerSerach: customerSerach });
+    }
+    else {
+        res.redirect("/")
+    }
 })
 
 app.get("/customarPage", (req, res) => {
-    res.render(__dirname + "/pages/customarPage");
+    if (req.session.cookie.isAuth) {
+        res.render(__dirname + "/pages/customarPage");
+    }
+    else {
+        res.redirect("/")
+    }
 })
 
 ///////////////////////post////////////////////////
 
 app.post("/login", (req, res) => {
     userModle.findOne({ userName: req.body.userName }, (err, doc) => {
-        if (doc.password == req.body.password)
-            if (doc.role == "1")
-                res.render(__dirname + "/pages/manager")
+        if (doc.password == req.body.password) {
+            req.session.cookie.isAuth = true;
+            if (req.session.cookie.isAuth == true) {
+                if (doc.role == "1")
+                    res.render(__dirname + "/pages/manager")
+                else if (doc.role == "employee")
+                    res.render(__dirname + "/pages/reseptionEmployee", { customerSerach: customerSerach });
+                else if (doc.role == "trainer")
+                    res.render(__dirname + "/pages/trainerEmployee", { customerSerach: customerSerach });
+            }
+
+        }
     })
 })
 
 app.post("/employeeAdd", (req, res) => {
     const newUser = new userModle({
         userName: req.body.newEmployeeName.toLowerCase(),
-        password: "123",
+        password: req.body.newEmployeePassword,
         role: req.body.employeeType
     })
     newUser.save();
